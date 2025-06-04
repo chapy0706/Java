@@ -148,8 +148,25 @@ LEFT JOIN countries c
 ON p.country_id = c.id;
 
 -- Q26 全てのゴール時間と得点を上げたプレイヤー名の表示（オウンゴール非表示・サブクエリ）
+SELECT 
+g.goal_time AS goal_time,
+(SELECT p.name 
+FROM players p 
+WHERE p.id = g.player_id
+) AS player_name
+FROM goals g
+WHERE g.player_id IS NOT NULL;
 
 -- Q27 各ポジション毎の最も身長と、その選手名、所属クラブの表示（FROM句でサブクエリ）
+SELECT p.position, p.name, p.height, p.club
+FROM players p,
+(SELECT position,
+MAX(height) AS max_height
+FROM players
+GROUP BY position
+) AS p2
+WHERE p.position = p2.position
+AND p.height = p2.max_height;
 
 -- Q28 各グループの最上位と最下位を表示し、その差が 50 より大きいグループの抽出
 SELECT group_name, MAX(ranking), MIN(ranking)

@@ -16,6 +16,8 @@ WHERE group_name != 'C';
 SELECT  *
 FROM players
 WHERE birth <= CURRENT_DATE - INTERVAL '40 years';
+-- 別解
+-- WHERE birth <= 'YYYY-MM-DD'
 
 -- Q5 身長が 170cm 未満の選手を抽出
 SELECT  *
@@ -196,13 +198,35 @@ WHERE weight > 95;
 -- Q31 身長の高い順に6位〜20位の選手の抽出
 SELECT name, height, weight
 FROM players
-ORDER BY height DESC, weight ASC
+ORDER BY height DESC, name ASC
 OFFSET 5
 LIMIT 20;
 
--- Q32 グループCの各対戦毎のゴール数を表示（ゴール数がゼロも表示・外部結合）
+-- Q32 グループCの各対戦毎のゴール数を表示（ゴール数がゼロも表示・外部結合
+-- 模範解答
+SELECT 
+p1.kickoff, c1.name AS my_country, c2.name AS enemy_country,
+c1.ranking AS my_ranking, c2.ranking AS enemy_ranking,
+COUNT(g1.id) AS my_goals
+FROM pairings p1
+LEFT JOIN countries c1 ON c1.id = p1.my_country_id
+LEFT JOIN countries c2 ON c2.id = p1.enemy_country_id
+LEFT JOIN goals g1 ON p1.id = g1.pairing_id
+WHERE c1.group_name = 'C' AND c2.group_name = 'C'
+GROUP BY p1.kickoff, c1.name, c2.name, c1.ranking, c2.ranking
+ORDER BY p1.kickoff, c1.ranking
 
 -- Q33　グループCの各対戦毎にゴール数の表示（ゴール数がゼロも表示・自国のゴール数はサブクエリ）
+-- 模範解答
+SELECT 
+p1.kickoff, c1.name AS my_country, c2.name AS enemy_country,
+c1.ranking AS my_ranking, c2.ranking AS enemy_ranking,
+(SELECT COUNT(g1.id) FROM goals g1 WHERE p1.id = g1.pairing_id) AS my_goals
+FROM pairings p1
+LEFT JOIN countries c1 ON c1.id = p1.my_country_id
+LEFT JOIN countries c2 ON c2.id = p1.enemy_country_id
+WHERE c1.group_name = 'C' AND c2.group_name = 'C'
+ORDER BY p1.kickoff, c1.ranking
 
 
 

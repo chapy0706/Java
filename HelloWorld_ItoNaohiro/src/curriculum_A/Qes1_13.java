@@ -127,7 +127,7 @@ public class Qes1_13 {
         System.out.println("身長は" + height + "cmです");            // 身長を出力
         System.out.println("体重は" + weight + "kgです");            // 体重を出力
         System.out.println("好きな食べ物は" + food + "です");         // 好きな食べ物を出力
-        System.out.println("BMIは" +weight /((height / 100) * (height / 100))+ "です");  //  BMIを出力
+        System.out.println("BMIは" + (Math.round(weight / ((height / 100) * (height / 100)) * 100.0) / 100.0) + "です");  //  BMIを出力
         
         /**********************************************************************************
 		* [概要] Qes9 自己代入
@@ -144,7 +144,7 @@ public class Qes1_13 {
         System.out.println("身長は" + height + "cmです");            // 身長を出力
         System.out.println("体重は" + weight + "kgです");            // 体重を出力
         System.out.println("好きな食べ物は" + food + "です");         // 好きな食べ物を出力
-        System.out.println("BMIは" +weight /((height / 100) * (height / 100))+ "です");  //  BMIを出力
+        System.out.println("BMIは" + (Math.round(weight / ((height / 100) * (height / 100)) * 100.0) / 100.0) + "です");  //  BMIを出力
         
         /**********************************************************************************
 		* [概要] Qes10 比較式

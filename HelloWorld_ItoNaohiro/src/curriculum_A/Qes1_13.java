@@ -152,5 +152,30 @@ public class Qes1_13 {
 		**********************************************************************************/
         // 出力
         System.out.println(age >= 25); // true が出力される
+        
+        /**********************************************************************************
+		* [概要] Qes11 型変換①
+		* [詳細] 【年齢・身長・体重】を文字列型に型変換し繋げて出力する
+		**********************************************************************************/        
+        // 文字列型に変換
+        String ageStr = String.valueOf(age);         // int型 → String型
+        String heightStr = String.valueOf(height);   // double型 → String型
+        String weightStr = String.valueOf(weight);   // double型 → String型
+        
+        // 文字列の連結と出力
+        String result = ageStr + heightStr + weightStr;
+        System.out.println(result);
+        
+        /**********************************************************************************
+		* [概要] Qes12 型変換②
+		* [詳細] 【年齢・身長】を整数型に変換して出力する
+		**********************************************************************************/  
+        // 整数型に変換
+        int ageInt = Integer.parseInt(ageStr);               // String型 → int型
+        int heightInt = (int) Double.parseDouble(heightStr); // String型 → 整数変換してint型
+        
+        // 出力
+        System.out.println(ageInt);
+        System.out.println(heightInt);
     }
 }

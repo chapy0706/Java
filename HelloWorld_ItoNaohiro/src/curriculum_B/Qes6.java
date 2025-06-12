@@ -22,7 +22,19 @@ public class Qes6 {
 		for (String item : items) {
 			switch (item) {
 				// 対象商品の場合
+				case "テレビ": // 商品がテレビの場合
+				case "ディスプレイ":// 商品がディスプレイの場合
+					int mainStock = 11; // 対象商品の指定在庫数
+					int sold = random.nextInt(12); // 販売数はランダムで0~11個
+					int nowStock = mainStock - sold; // テレビ、ディスプレイは在庫数から販売数を引いた値
+					System.out.println(item + "の残り台数は" + nowStock + "台です");// 在庫数アナウンス
+					break; // 処理の終了
+					
 				case "パソコン": // 商品がパソコンの場合
+				case "冷蔵庫": // 商品が冷蔵庫の場合
+                case "扇風機": // 商品が扇風機の場合
+                case "洗濯機": // 商品が洗濯機の場合
+                case "加湿器": // 商品が加湿器の場合
 					int stock = random.nextInt(12); // 在庫数はランダムで0~11個
                     System.out.println(item + "の残り台数は" + stock + "台です"); // 在庫数アナウンス
                     scanner.close(); // リソースを解放

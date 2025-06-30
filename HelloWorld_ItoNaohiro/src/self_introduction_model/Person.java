@@ -31,7 +31,10 @@ public class Person{
         // 問題9：thisを使って出力する
         System.out.println("名前は" + this.name + "です"); // 名前
         System.out.println("年は" + this.age + "才です"); // 年齢
-        System.out.printf("BMIは%.1fです\n", this.bmi()); // BMI
+        // BMI(小数点以下切り捨て表示）
+        double rawBmi = this.bmi(); // 変換前のBMI値
+        double bmiTruncated = Math.floor(rawBmi); // 小数点以下切り捨て
+        System.out.println("BMIは" + bmiTruncated + "です"); // 出力
     }
     
     // 問題10：合計人数を出力する (static)

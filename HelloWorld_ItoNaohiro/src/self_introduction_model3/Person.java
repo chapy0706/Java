@@ -2,15 +2,21 @@ package self_introduction_model3;
 
 public class Person{
 	 public static int count = 0;
-	 public String firstName;
+	 // 問題1：lastNameを追加
+	 public String firstName, lastName;
 	 public int age;
 	 public double height, weight;
 
-	 Person(String firstName, int age, double height, double weight){
+	 // 問題2：コンストラクタにlastNameを追加
+	 public Person(String firstName, String lasttName,int age, double height, double weight){
 		 this.firstName = firstName;
+		 // 問題3：lastNameフィールドの値をセット
+		 this.lastName = lasttName;
 		 this.age = age;
 	     this.height = height;
 	     this.weight = weight;
+	     // 問題3：Person.count++; の追加
+	     Person.count++; 
 	 }
 
 	 public String fullName(){

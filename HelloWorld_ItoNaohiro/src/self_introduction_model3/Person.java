@@ -1,5 +1,8 @@
 package self_introduction_model3;
 
+import vehicle_model.Bicycle;
+import vehicle_model.Car;
+
 public class Person{
 	 public static int count = 0;
 	 // 問題1：lastNameを追加
@@ -35,4 +38,18 @@ public class Person{
 	 public static void printCount(){
 		 System.out.println("合計" + Person.count + "人です");
 	 }
+	 
+	 // 問題6：インスタンスメソッド「buy」を定義（仮引数：car）
+	 public void buy(Car car) {
+		 // 問題7：setOwnerメソッドとthisを用いてownerフィールドの値をセット
+		 car.setOwner(this.fullName());
+		 // 問題8：「〇〇が購入しました」と出力
+		 System.out.println(car.getOwner() + "が購入しました");
+	}
+	 
+	 // 問題9：buyメソッドを定義（仮引数：bicycle）
+	 public void buy(Bicycle bicycle) {
+		 bicycle.setOwner(this.fullName());
+		 System.out.println(bicycle.getOwner() + "が購入しました");
+	}
 }

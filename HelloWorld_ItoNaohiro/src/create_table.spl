@@ -1,0 +1,75 @@
+-- トランザクション開始
+BEGIN;
+
+-- 1.storeテーブル
+CREATE TABLE store (
+    store_code           VARCHAR(5)      NOT NULL PRIMARY KEY,     -- 店舗コード
+    store_name           VARCHAR(25)     NOT NULL,                 -- 店舗名
+    floor_id             VARCHAR(8)      NOT NULL,                 -- フロアID
+    store_category_id    INTEGER,                                  -- 店舗商品カテゴリーID
+    delete_flag          INTEGER         DEFAULT 0,                -- 削除フラグ
+    created_at           TIMESTAMP       DEFAULT '2023-01-01 00:00:00', -- 作成日
+    updated_at           TIMESTAMP                                -- 変更日
+);
+
+-- 2.floorテーブル
+CREATE TABLE floor (
+    floor_id             VARCHAR(8)      NOT NULL PRIMARY KEY,     -- フロアID
+    floor_name           VARCHAR(10)     NOT NULL,                 -- フロア名
+    floor_info           VARCHAR(50),                              -- フロア情報
+    store_count          INTEGER         DEFAULT 1,                -- 店舗数
+    open_space           INTEGER         DEFAULT 0,                -- 空きスペース
+    created_at           TIMESTAMP       DEFAULT '2023-01-01 00:00:00', -- 作成日
+    updated_at           TIMESTAMP                                -- 変更日
+);
+
+-- 3.productテーブル
+CREATE TABLE product (
+    product_id           SMALLSERIAL     PRIMARY KEY,              -- 商品ID
+    product_name         VARCHAR(25)     NOT NULL,                 -- 商品名
+    category_id          INTEGER         NOT NULL,                 -- メイン商品カテゴリーID
+    store_code           VARCHAR         NOT NULL,                 -- 店舗コード
+    brand_name           VARCHAR(25),                              -- ブランド名
+    unit_price           INTEGER         DEFAULT 0,                -- 商品単価
+    product_price        INTEGER         DEFAULT 0,                -- 商品価格
+    stock_quantity       INTEGER         DEFAULT 100,              -- 在庫数
+    stock_out_flag       BOOLEAN         DEFAULT 'FALSE',          -- 欠品フラグ
+    created_at           TIMESTAMP       DEFAULT '2023-01-01 00:00:00', -- 作成日
+    updated_at           TIMESTAMP                                -- 変更日
+);
+
+-- 4.product_category
+CREATE TABLE product_category (
+    category_id          SMALLSERIAL     PRIMARY KEY,              -- 商品カテゴリーID
+    category_name        VARCHAR(20)     NOT NULL,                 -- 商品カテゴリー名
+    explanation          VARCHAR(25),                              -- 説明
+    created_at           TIMESTAMP       DEFAULT '2023-01-01 00:00:00', -- 作成日
+    updated_at           TIMESTAMP                                -- 変更日
+);
+
+-- 5.facility
+CREATE TABLE facility (
+    facility_code        VARCHAR(10)     NOT NULL PRIMARY KEY,     -- 設備コード
+    facility_name        VARCHAR(15)     NOT NULL,                 -- 設備名
+    created_at           TIMESTAMP       DEFAULT '2023-01-01 00:00:00', -- 作成日
+    updated_at           TIMESTAMP                                -- 変更日
+);
+
+-- 6.department_store_joinテーブル
+CREATE TABLE department_store_join (
+    no                   SMALLSERIAL     PRIMARY KEY,              -- No
+    floor_id             VARCHAR(10)     NOT NULL,                 -- フロアID
+    item_name            VARCHAR(15)     NOT NULL,                 -- 項目名
+    item_code            VARCHAR(10)     NOT NULL,                 -- 項目コード
+    explanation          VARCHAR(50),                              -- 説明
+    created_at           TIMESTAMP       DEFAULT '2023-01-01 00:00:00', -- 作成日
+    updated_at           TIMESTAMP                                -- 変更日
+);
+
+-- ロールバック処理動作確認
+-- ROLLBACK;
+
+-- コミット処理(トランザクション終了)
+COMMIT;
+
+
